@@ -296,18 +296,11 @@ input[type="range"] {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
 }
 
-.prompt-box p {
+.note-box p {
+  margin-top: 10px;
   color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.55;
-}
-
-.icon-button {
-  display: grid;
-  width: 34px;
-  min-height: 34px;
-  place-items: center;
-  font-size: 1rem;
 }
 
 @media (max-width: 980px) {

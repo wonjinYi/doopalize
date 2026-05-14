@@ -67,12 +67,17 @@
               <div class="meter" aria-hidden="true"><span id="meterFill"></span></div>
             </div>
 
-            <div class="panel-section prompt-box">
+            <div class="panel-section">
               <div class="section-heading">
-                <h2>AI 편집 프롬프트</h2>
-                <button id="copyPrompt" class="icon-button" type="button" title="프롬프트 복사">⧉</button>
+                <h2>윤곽 보정</h2>
+                <output id="edgeValue">58</output>
               </div>
-              <p id="promptText"></p>
+              <input id="edgePower" type="range" min="0" max="100" value="58" />
+            </div>
+
+            <div class="panel-section note-box">
+              <h2>현재 방식</h2>
+              <p>업로드한 사진은 서버로 전송되지 않고, 브라우저 캔버스에서 대비, 채도, 배경, 윤곽, 조명만 보정합니다.</p>
             </div>
           </aside>
         </div>
