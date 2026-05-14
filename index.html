@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doopalize</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="Doopalize editor">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Doopalizer</p>
+            <h1>사원증 사진을 업무 방어형 인상으로</h1>
+          </div>
+          <div class="brand-mark" aria-hidden="true">D</div>
+        </header>
+
+        <div class="editor-grid">
+          <section class="stage-panel" aria-label="image preview">
+            <div id="dropZone" class="drop-zone">
+              <input id="photoInput" type="file" accept="image/*" />
+              <canvas id="photoCanvas" width="1200" height="1500"></canvas>
+              <div id="emptyState" class="empty-state">
+                <div class="upload-icon" aria-hidden="true"></div>
+                <strong>사진을 올리면 바로 두팔라이즈됩니다</strong>
+                <span>JPG, PNG, WEBP 지원</span>
+              </div>
+            </div>
+          </section>
+
+          <aside class="control-panel" aria-label="controls">
+            <div class="panel-section file-actions">
+              <label class="button primary" for="photoInput">사진 선택</label>
+              <button id="downloadButton" class="button" type="button" disabled>결과 저장</button>
+            </div>
+
+            <div class="panel-section">
+              <div class="section-heading">
+                <h2>두팔 강도</h2>
+                <output id="intensityValue">72</output>
+              </div>
+              <input id="intensity" type="range" min="0" max="100" value="72" />
+            </div>
+
+            <div class="panel-section">
+              <h2>인상 방향</h2>
+              <div class="segmented" role="group" aria-label="style preset">
+                <button class="segment active" type="button" data-preset="badge">사원증</button>
+                <button class="segment" type="button" data-preset="executive">임원실</button>
+                <button class="segment" type="button" data-preset="enforcer">곽두팔</button>
+              </div>
+            </div>
+
+            <div class="panel-section toggles">
+              <label><input id="identitySafe" type="checkbox" checked /> 원본 얼굴선 보존</label>
+              <label><input id="backgroundMute" type="checkbox" checked /> 배경 존재감 낮추기</label>
+              <label><input id="badgeCrop" type="checkbox" /> 사원증 비율로 정리</label>
+            </div>
+
+            <div class="panel-section meter-section">
+              <div class="section-heading">
+                <h2>문의 회피 예상치</h2>
+                <strong id="avoidanceScore">78%</strong>
+              </div>
+              <div class="meter" aria-hidden="true"><span id="meterFill"></span></div>
+            </div>
+
+            <div class="panel-section prompt-box">
+              <div class="section-heading">
+                <h2>AI 편집 프롬프트</h2>
+                <button id="copyPrompt" class="icon-button" type="button" title="프롬프트 복사">⧉</button>
+              </div>
+              <p id="promptText"></p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
