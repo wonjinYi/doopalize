@@ -166,17 +166,9 @@ const drawMenaceShadows = (amount, menaceAmount) => {
   const radius = Math.min(width, height) * (Number(faceScale.value) / 100);
   const power = amount * menaceAmount;
 
-  burnSoftEllipse(cx - radius * 0.23, cy - radius * 0.12, radius * 0.2, radius * 0.09, 0.18 * power);
-  burnSoftEllipse(cx + radius * 0.23, cy - radius * 0.12, radius * 0.2, radius * 0.09, 0.18 * power);
-  burnSoftEllipse(cx, cy + radius * 0.32, radius * 0.34, radius * 0.2, 0.1 * power);
-
-  const highlight = ctx.createRadialGradient(cx, cy - radius * 0.04, 0, cx, cy - radius * 0.04, radius * 0.36);
-  highlight.addColorStop(0, `rgba(255,244,220,${0.12 * power})`);
-  highlight.addColorStop(1, "rgba(255,255,255,0)");
-  ctx.globalCompositeOperation = "screen";
-  ctx.fillStyle = highlight;
-  ctx.fillRect(0, 0, width, height);
-  ctx.globalCompositeOperation = "source-over";
+  burnSoftEllipse(cx - radius * 0.23, cy - radius * 0.12, radius * 0.2, radius * 0.09, 0.11 * power);
+  burnSoftEllipse(cx + radius * 0.23, cy - radius * 0.12, radius * 0.2, radius * 0.09, 0.11 * power);
+  burnSoftEllipse(cx, cy + radius * 0.32, radius * 0.34, radius * 0.2, 0.06 * power);
 };
 
 const drawPortraitLighting = (amount, menaceAmount) => {
@@ -190,59 +182,25 @@ const drawPortraitLighting = (amount, menaceAmount) => {
     height * 0.45,
     width * 0.72,
   );
-  vignette.addColorStop(0, `rgba(255,255,255,${0.03 * amount})`);
+  vignette.addColorStop(0, "rgba(255,255,255,0)");
   vignette.addColorStop(0.52, "rgba(0,0,0,0)");
-  vignette.addColorStop(1, `rgba(0,0,0,${0.48 * amount * backgroundFactor})`);
+  vignette.addColorStop(1, `rgba(0,0,0,${0.2 * amount * backgroundFactor})`);
   ctx.fillStyle = vignette;
   ctx.fillRect(0, 0, width, height);
 
-  ctx.globalCompositeOperation = "multiply";
-  ctx.fillStyle = `rgba(32, 38, 44, ${0.24 * amount})`;
-  ctx.fillRect(0, 0, width, height);
-  ctx.globalCompositeOperation = "source-over";
-
-  const faceLight = ctx.createRadialGradient(
-    width * 0.5,
-    height * 0.36,
-    width * 0.02,
-    width * 0.5,
-    height * 0.38,
-    width * 0.34,
-  );
-  faceLight.addColorStop(0, `rgba(255, 242, 214, ${0.16 * amount})`);
-  faceLight.addColorStop(0.48, `rgba(255, 255, 255, ${0.05 * amount})`);
-  faceLight.addColorStop(1, "rgba(255,255,255,0)");
-  ctx.globalCompositeOperation = "screen";
-  ctx.fillStyle = faceLight;
-  ctx.fillRect(0, 0, width, height);
-
   const upperShadow = ctx.createLinearGradient(0, height * 0.18, 0, height * 0.48);
-  upperShadow.addColorStop(0, `rgba(0,0,0,${0.16 * amount})`);
-  upperShadow.addColorStop(0.48, `rgba(0,0,0,${(0.08 + menaceAmount * 0.08) * amount})`);
+  upperShadow.addColorStop(0, `rgba(0,0,0,${0.08 * amount})`);
+  upperShadow.addColorStop(0.48, `rgba(0,0,0,${(0.035 + menaceAmount * 0.035) * amount})`);
   upperShadow.addColorStop(1, "rgba(0,0,0,0)");
   ctx.globalCompositeOperation = "multiply";
   ctx.fillStyle = upperShadow;
   ctx.fillRect(0, 0, width, height);
 
-  const lowerShadow = ctx.createRadialGradient(
-    width * 0.5,
-    height * 0.68,
-    width * 0.08,
-    width * 0.5,
-    height * 0.66,
-    width * 0.44,
-  );
-  lowerShadow.addColorStop(0, `rgba(0,0,0,${0.04 * amount})`);
-  lowerShadow.addColorStop(0.62, `rgba(0,0,0,${(0.08 + menaceAmount * 0.1) * amount})`);
-  lowerShadow.addColorStop(1, "rgba(0,0,0,0)");
-  ctx.fillStyle = lowerShadow;
-  ctx.fillRect(0, 0, width, height);
-
   const sideBurn = ctx.createLinearGradient(0, 0, width, 0);
-  sideBurn.addColorStop(0, `rgba(0,0,0,${0.28 * amount * backgroundFactor})`);
+  sideBurn.addColorStop(0, `rgba(0,0,0,${0.12 * amount * backgroundFactor})`);
   sideBurn.addColorStop(0.28, "rgba(0,0,0,0)");
   sideBurn.addColorStop(0.72, "rgba(0,0,0,0)");
-  sideBurn.addColorStop(1, `rgba(0,0,0,${0.28 * amount * backgroundFactor})`);
+  sideBurn.addColorStop(1, `rgba(0,0,0,${0.12 * amount * backgroundFactor})`);
   ctx.fillStyle = sideBurn;
   ctx.fillRect(0, 0, width, height);
 
@@ -252,36 +210,20 @@ const drawPortraitLighting = (amount, menaceAmount) => {
 const applyPixels = (amount, menaceAmount) => {
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const data = imageData.data;
-  const contrast = 1 + amount * (preset === "enforcer" ? 0.88 : 0.58) + menaceAmount * 0.18;
-  const saturation = 1 - amount * (preset === "executive" ? 0.2 : 0.38);
-  const brightness = 1 - amount * 0.02;
-  const warmth = preset === "executive" ? 6 : -4;
-  const curveStrength = 0.22 + amount * 0.36 + menaceAmount * 0.18;
+  const contrast = 1 + amount * 0.1 + menaceAmount * 0.06;
 
   for (let i = 0; i < data.length; i += 4) {
     let r = data[i];
     let g = data[i + 1];
     let b = data[i + 2];
-    const gray = r * 0.299 + g * 0.587 + b * 0.114;
-
-    r = gray + (r - gray) * saturation;
-    g = gray + (g - gray) * saturation;
-    b = gray + (b - gray) * saturation;
 
     r = (r - 128) * contrast + 128;
     g = (g - 128) * contrast + 128;
     b = (b - 128) * contrast + 128;
 
-    const tone = (r + g + b) / 3;
-    const curve = ((tone - 128) / 128) * curveStrength;
-    const lift = curve * Math.abs(curve) * 128;
-    r += lift;
-    g += lift;
-    b += lift;
-
-    data[i] = Math.max(0, Math.min(255, r * brightness + warmth * amount));
-    data[i + 1] = Math.max(0, Math.min(255, g * brightness + 2 * amount));
-    data[i + 2] = Math.max(0, Math.min(255, b * brightness - warmth * amount));
+    data[i] = clamp(r, 0, 255);
+    data[i + 1] = clamp(g, 0, 255);
+    data[i + 2] = clamp(b, 0, 255);
   }
 
   ctx.putImageData(imageData, 0, 0);
