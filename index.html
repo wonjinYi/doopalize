@@ -69,15 +69,34 @@
 
             <div class="panel-section">
               <div class="section-heading">
-                <h2>윤곽 보정</h2>
-                <output id="edgeValue">58</output>
+                <h2>험악 변형</h2>
+                <output id="menaceValue">68</output>
               </div>
-              <input id="edgePower" type="range" min="0" max="100" value="58" />
+              <input id="menacePower" type="range" min="0" max="100" value="68" />
+            </div>
+
+            <div class="panel-section face-guide">
+              <div class="section-heading">
+                <h2>얼굴 위치</h2>
+                <button id="resetFace" class="small-button" type="button">초기화</button>
+              </div>
+              <label>
+                좌우
+                <input id="faceX" type="range" min="35" max="65" value="50" />
+              </label>
+              <label>
+                상하
+                <input id="faceY" type="range" min="32" max="58" value="43" />
+              </label>
+              <label>
+                크기
+                <input id="faceScale" type="range" min="30" max="58" value="42" />
+              </label>
             </div>
 
             <div class="panel-section note-box">
               <h2>현재 방식</h2>
-              <p>업로드한 사진은 서버로 전송되지 않고, 브라우저 캔버스에서 대비, 채도, 배경, 윤곽, 조명만 보정합니다.</p>
+              <p>업로드한 사진은 서버로 전송되지 않고, 브라우저 캔버스에서 얼굴 비율, 눈가 압박감, 턱선, 조명, 대비를 직접 변형합니다.</p>
             </div>
           </aside>
         </div>

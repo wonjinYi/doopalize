@@ -198,7 +198,7 @@ h2 {
 }
 
 .button,
-.icon-button,
+.small-button,
 .segment {
   min-height: 42px;
   border: 1px solid var(--line);
@@ -224,6 +224,14 @@ h2 {
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.45;
+}
+
+.small-button {
+  min-height: 32px;
+  padding: 0 10px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .section-heading {
@@ -279,6 +287,20 @@ input[type="range"] {
   width: 18px;
   height: 18px;
   accent-color: var(--accent);
+}
+
+.face-guide {
+  display: grid;
+  gap: 10px;
+}
+
+.face-guide label {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
 .meter {
